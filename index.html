@@ -1203,5 +1203,35 @@
     updateCountdown();
     setInterval(updateCountdown, 1000);
 </script>
+
+  <script>
+    const weddingMusic = document.getElementById("weddingMusic");
+    const musicToggle = document.getElementById("musicToggle");
+
+    if (weddingMusic && musicToggle) {
+      const musicText = musicToggle.querySelector(".music-text");
+
+      musicToggle.addEventListener("click", async () => {
+        try {
+          if (weddingMusic.paused) {
+            weddingMusic.volume = 0.75;
+            await weddingMusic.play();
+            musicToggle.classList.add("playing");
+            musicText.textContent = "Музыка играет";
+            musicToggle.setAttribute("aria-label", "Выключить музыку");
+          } else {
+            weddingMusic.pause();
+            musicToggle.classList.remove("playing");
+            musicText.textContent = "Включить музыку";
+            musicToggle.setAttribute("aria-label", "Включить музыку");
+          }
+        } catch (error) {
+          musicText.textContent = "Нажмите ещё раз";
+          console.log("Не удалось запустить музыку:", error);
+        }
+      });
+    }
+  </script>
+
 </body>
 </html>
